@@ -53,12 +53,12 @@ public class MovieService {
     public ResponseEntity<MovieDto> addGenre(Long movieId, Long genreId) {
         Genre genre = genreMapper.toEntity(genreService.getGenreById(genreId));
         Movie movie = movieMapper.toEntity(getMovieById(movieId));
-        if(movie.getGenres().contains(genre)){
-            throw new BadRequestException(RestApiError.GENRE_ALREADY_EXIST);
-        }else {
-            movie.getGenres().add(genre);
-            MovieDto movieDto = movieMapper.toDto(movieRepository.save(movie));
-            return new ResponseEntity<>(movieDto, HttpStatus.OK);
+        if (movie.getGenres().contains(genre)) {
+             throw new BadRequestException(RestApiError.GENRE_ALREADY_EXIST);
+        } else {
+             movie.getGenres().add(genre);
+             MovieDto movieDto = movieMapper.toDto(movieRepository.save(movie));
+             return new ResponseEntity<>(movieDto, HttpStatus.OK);
         }
 
     }
